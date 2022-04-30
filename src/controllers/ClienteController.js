@@ -4,7 +4,6 @@ class ClienteController {
   async index(req, res) {
     try {
       const clientes = await Cliente.findAll();
-      console.log(`Lista de cliente${clientes}`);
       return res.json(clientes);
     } catch (e) {
       console.log(`Errors -> ${e}`);
