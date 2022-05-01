@@ -36,7 +36,16 @@ class TicketController {
   // buscar por ID
   async show(req, res) {
     try {
-      const ticket = await Ticket.findByPk(req.params.id);
+      const ticket = await Ticket.findByPk(req.params.id, {
+        include: [{
+          model: Funcionario,
+          attributes: ['nome'],
+        },
+        {
+          model: Cliente,
+          attributes: ['nome'],
+        }],
+      });
       return res.json(ticket);
     } catch (e) {
       return res.json({ errors: 'Nenhum registro encontrado com o ID informado' });
