@@ -21,7 +21,19 @@ module.exports = {
           type: Sequelize.STRING(11),
           allowNull: false,
         },
-        endereco: {
+        rua: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        bairro: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        cep: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        numero: {
           type: Sequelize.STRING,
           allowNull: false,
         },
