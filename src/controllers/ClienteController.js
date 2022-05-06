@@ -1,9 +1,44 @@
 import Cliente from '../models/Cliente';
 
 class ClienteController {
-  async index(req, res) {
+  // Registros desativados
+  async noActive(req, res) {
+    try {
+      const clientes = await Cliente.findAll(
+        {
+          where: {
+            ativo: false,
+          },
+        },
+      );
+      return res.json(clientes);
+    } catch (e) {
+      console.log(`Errors -> ${e}`);
+      return res.json(null);
+    }
+  }
+
+  // Todos os registros
+  async getAll(req, res) {
     try {
       const clientes = await Cliente.findAll();
+      return res.json(clientes);
+    } catch (e) {
+      console.log(`Errors -> ${e}`);
+      return res.json(null);
+    }
+  }
+
+  // Todos ativos
+  async index(req, res) {
+    try {
+      const clientes = await Cliente.findAll(
+        {
+          where: {
+            ativo: true,
+          },
+        },
+      );
       return res.json(clientes);
     } catch (e) {
       console.log(`Errors -> ${e}`);
