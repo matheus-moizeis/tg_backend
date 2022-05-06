@@ -3,10 +3,54 @@ import Cliente from "../models/Cliente";
 import Ticket from "../models/Tickets";
 
 class TicketController {
-  // todos
+  // Todos Finalizados
+  async finishedTickets(req, res) {
+    try {
+      const tickets = await Ticket.findAll({
+        where: {
+          finalizado: true,
+        },
+        include: [{
+          model: Funcionario,
+          attributes: ['nome'],
+        },
+        {
+          model: Cliente,
+          attributes: ['nome'],
+        }],
+      });
+      return res.json(tickets);
+    } catch (e) {
+      return res.json(null);
+    }
+  }
+
+  // Todos finalizados e não finalizados
+  async allTickets(req, res) {
+    try {
+      const tickets = await Ticket.findAll({
+        include: [{
+          model: Funcionario,
+          attributes: ['nome'],
+        },
+        {
+          model: Cliente,
+          attributes: ['nome'],
+        }],
+      });
+      return res.json(tickets);
+    } catch (e) {
+      return res.json(null);
+    }
+  }
+
+  // todos não finalizados
   async index(req, res) {
     try {
       const tickets = await Ticket.findAll({
+        where: {
+          finalizado: false,
+        },
         include: [{
           model: Funcionario,
           attributes: ['nome'],
